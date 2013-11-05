@@ -2,11 +2,12 @@ Vagrant::Config.run do |config|
 
   config.vm.box = 'mongo'
   config.vm.box_url = 'http://puppet-vagrant-boxes.puppetlabs.com/ubuntu-server-12042-x64-vbox4210.box'
-  config.vm.provision :shell, :inline => 'sudo apt-get update && sudo apt-get install puppet -y'
+  config.vm.provision :shell, :inline => 'sudo apt-get update && sudo apt-get install puppet -y -q'
 
   config.vm.provision 'puppet' do |puppet|
     puppet.module_path = 'modules'
-    puppet.options = '--verbose --debug'
+    puppet.facter = {always_apt_update: true}
+    #puppet.options = '--verbose --debug'
   end
 
   config.vm.define :mongo1 do |mongo|
