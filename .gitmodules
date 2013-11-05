@@ -1,6 +1,6 @@
 [submodule "modules/mongodb"]
 	path = modules/mongodb
-	url = https://github.com/echocat/puppet-mongodb.git
+	url = git@github.com:devigned/puppet-mongodb.git
 [submodule "modules/stdlib"]
 	path = modules/stdlib
 	url = https://github.com/puppetlabs/puppetlabs-stdlib.git
