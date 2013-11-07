@@ -6,27 +6,21 @@ Vagrant::Config.run do |config|
   # Update puppet and basic stuff
   config.vm.provision :shell, :inline => 'sudo apt-get update && sudo apt-get install puppet -y -q'
   config.vm.define :mongo1 do |mongo|
-    mongo.vm.network :hostonly, '10.11.12.13'
-    mongo.vm.host_name = 'mongo1.local'
-    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '1',
-                                                                 other_shard1: '10.11.12.14',
-                                                                 other_shard2: '10.11.12.15'}
+    mongo.vm.host_name = 'mongodb1'
+    mongo.vm.network :hostonly, '10.0.0.2'
+    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '1'}
   end
 
   config.vm.define :mongo2 do |mongo|
-    mongo.vm.network :hostonly, '10.11.12.14'
-    mongo.vm.host_name = 'mongo2.local'
-    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '2',
-                                                                 other_shard1: '10.11.12.13',
-                                                                 other_shard2: '10.11.12.15'}
+    mongo.vm.host_name = 'mongodb2'
+    mongo.vm.network :hostonly, '10.0.0.3'
+    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '2'}
   end
 
   config.vm.define :mongo3 do |mongo|
-    mongo.vm.network :hostonly, '10.11.12.15'
-    mongo.vm.host_name = 'mongo3.local'
-    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '3',
-                                                                 other_shard1: '10.11.12.13',
-                                                                 other_shard2: '10.11.12.14'}
+    mongo.vm.host_name = 'mongodb3'
+        mongo.vm.network :hostonly, '10.0.0.4'
+    mongo.vm.provision :puppet, module_path: 'modules', facter: {mongo_number: '3'}
   end
 
 end
